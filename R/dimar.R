@@ -16,7 +16,7 @@
 #' filepath <- system.file("extdata", filename, package = "DIMAR")
 #' Imp <- dimar(mtx = filepath, pattern = 'Intensity', group = c('PKB','PKC'))
 
-dimar <- function(mtx, pattern = NULL, methods = 'fast', npat = NULL, group = 'cluster') {
+dimar <- function(mtx, pattern = NULL, methods = 'fast', ncores=NULL, npat = NULL, group = 'cluster') {
 
   if (is.character(mtx)) {
     file <- mtx
@@ -45,7 +45,7 @@ dimar <- function(mtx, pattern = NULL, methods = 'fast', npat = NULL, group = 'c
   ref <- dimarConstructReferenceData(mtx)
   sim <- dimarAssignPattern(ref, coef, mtx, npat)
 
-  Imputations <- dimarDoImputations(sim, methods)
+  Imputations <- dimarDoImputations(sim, methods, ncores)
   Performance <- dimarEvaluatePerformance(Imputations, ref, sim, 'RMSE', TRUE, group)
   Imp <- dimarDoOptimalImputation(mtx, rownames(Performance))
 
