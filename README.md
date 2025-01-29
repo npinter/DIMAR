@@ -20,7 +20,7 @@ MaxQuant file path as input (Example taken from (Reimann et al. (2020))):
 library(DIMAR)
 filename <- "Test1.txt"
 filepath <- system.file("extdata", filename, package = "DIMAR")
-Imp <- DIMAR::dimar(mtx = filepath, pattern = 'Intensity', group = c('PKB','PKC'))
+Imp <- DIMAR::dimar(mtx = filepath, pattern = 'Intensity', ncores=10, group = c('PKB','PKC'))
 ```
 
 Matrix as input 
